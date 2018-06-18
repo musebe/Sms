@@ -35,14 +35,11 @@ app.post('/', (req, res) => {
   const to = req.body.number;
   const message = req.body.text;
   const sms = AfricasTalking.SMS;
-  try {
-+    const response = await sms.send({to: `+254${to}`, message})
-+    console.log(response)
-+  } catch (e) {
-+    console.log(e)
-+  }
-});
+     sms.send({to: `+254${to}`, message})
+    .then((reply) => {console.log(reply)})
+    .catch((error) => {console.log(error)});
 
+});
 
 // Define port
 const port = 3000;
