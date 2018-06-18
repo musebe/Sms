@@ -7,7 +7,7 @@ const socketio = require('socket.io');
 // Init africastalking
 const AfricasTalking = new africastalking({
   apiKey: '5f4b74919c450e82ef3f35c6392a1b5ed74804eebc2b03112b12b39fa59d6ff6',
-  username: 'musebe'
+  username: 'sandbox'
 }, {debug: true});
 
 // Init app
@@ -35,9 +35,12 @@ app.post('/', (req, res) => {
   const to = req.body.number;
   const message = req.body.text;
   const sms = AfricasTalking.SMS;
-  sms.send(to,message)
-     .then(success)
-     .catch(error);
+  try {
++    const response = await sms.send({to: `+254${to}`, message})
++    console.log(response)
++  } catch (e) {
++    console.log(e)
++  }
 });
 
 
