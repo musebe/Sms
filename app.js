@@ -1,8 +1,8 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const ejs = require('ejs');
-const africastalking = require('africastalking');
 const socketio = require('socket.io');
+const africastalking = require('africastalking');
 
 // Init africastalking
 const AfricasTalking = new africastalking({
@@ -36,13 +36,21 @@ app.post('/', (req, res) => {
   const message = req.body.text;
   const sms = AfricasTalking.SMS;
      sms.send({to: `+254${to}`, message})
-    .then((reply) => {console.log(reply)})
-    .catch((error) => {console.log(error)});
+    .then(success => console.log({message: message, to: to}))
+    .catch(error => console.log(error));
+    // Get data from response
+    const data = {
+      message: message,
+      number: to
+    }
+
+    // Emit to the client
+    io.emit('smsStatus', data);
 
 });
 
 // Define port
-const port = 3000;
+const port = 8080;
 
 // Start server
 const server = app.listen(port, () => console.log(`We Love Nerds ${port}`));
