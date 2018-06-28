@@ -6,8 +6,8 @@ const africastalking = require('africastalking');
 
 // Init africastalking
 const AfricasTalking = new africastalking({
-  apiKey: '5f4b74919c450e82ef3f35c6392a1b5ed74804eebc2b03112b12b39fa59d6ff6',
-  username: 'sandbox'
+  apiKey: 'xxxxxxxxxxxx',
+  username: 'xxxxxxxxxx'
 }, {debug: true});
 
 // Init app
